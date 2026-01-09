@@ -1,66 +1,66 @@
-// ELIMINAR PRELOADER AL CARGAR
+// Ocultar preloader inmediatamente al cargar
 window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    setTimeout(() => {
-        preloader.style.opacity = '0';
-        setTimeout(() => preloader.style.display = 'none', 1000);
-    }, 2000);
+    document.getElementById('preloader').style.opacity = '0';
+    setTimeout(() => document.getElementById('preloader').remove(), 400);
 });
 
-// MOTOR DE POLVO DE ORO (PARTÍCULAS)
-const canvas = document.getElementById('goldDustCanvas');
+// Partículas optimizadas
+const canvas = document.getElementById('goldCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let particles = [];
 
-let goldSpecks = [];
+function initCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 
-class Speck {
+class Particle {
     constructor() {
         this.reset();
     }
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedY = Math.random() * 0.4 + 0.1;
-        this.alpha = Math.random();
+        this.size = Math.random() * 2;
+        this.speed = Math.random() * 0.5 + 0.1;
     }
     update() {
-        this.y += this.speedY;
-        if (this.y > canvas.height) this.reset();
+        this.y += this.speed;
+        if (this.y > canvas.height) this.y = -10;
     }
     draw() {
-        ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
+        ctx.fillStyle = "rgba(212, 175, 55, 0.5)";
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
-for(let i=0; i<150; i++) goldSpecks.push(new Speck());
+// Creamos solo 60 partículas (suficiente para el efecto sin lag)
+for(let i=0; i<60; i++) particles.push(new Particle());
 
-function render() {
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    goldSpecks.forEach(s => { s.update(); s.draw(); });
-    requestAnimationFrame(render);
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
 }
-render();
 
-// COUNTDOWN DINÁMICO
-const target = new Date("July 18, 2026 19:00:00").getTime();
+initCanvas();
+animate();
+
+// Contador
+const targetDate = new Date("July 18, 2026 19:00:00").getTime();
 setInterval(() => {
-    const now = new Date().getTime();
-    const diff = target - now;
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    const diff = targetDate - new Date().getTime();
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
 
     document.getElementById("countdown").innerHTML = `
-        <div class="timer-block"><b>${d}</b><span>DÍAS</span></div>
-        <div class="timer-block"><b>${h}</b><span>HRS</span></div>
-        <div class="timer-block"><b>${m}</b><span>MIN</span></div>
-        <div class="timer-block"><b>${s}</b><span>SEG</span></div>
+        <div><b>${d}</b> Días</div>
+        <div><b>${h}</b> Hrs</div>
+        <div><b>${m}</b> Min</div>
+        <div><b>${s}</b> Seg</div>
     `;
 }, 1000);

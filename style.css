@@ -1,86 +1,80 @@
+/* Optimizamos variables para evitar cálculos repetidos */
 :root {
-    --gold-main: linear-gradient(45deg, #a67c00, #ffbf00, #ffdc73, #ffbf00, #a67c00);
-    --pink-dark: #880e4f;
-    --white-glass: rgba(255, 255, 255, 0.15);
-    --transition-smooth: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    --gold: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728);
+    --pink: #ad1457;
 }
 
-body, html { 
-    margin: 0; padding: 0; background: #000; 
-    color: #444; font-family: 'Montserrat', sans-serif;
+body {
+    margin: 0; background: #fff;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden; /* Evita scrolls accidentales que ralentizan */
 }
 
-/* PRELOADER */
 #preloader {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #fff; z-index: 9999; display: flex;
-    justify-content: center; align-items: center; transition: 1s ease;
+    position: fixed; inset: 0; background: #fff; z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.4s ease-out;
 }
 
 .monograma {
-    font-family: 'Pinyon Script', cursive; font-size: 5rem;
-    background: var(--gold-main); -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; animation: pulse 2s infinite;
+    font-family: 'Pinyon Script', cursive; font-size: 4rem;
+    background: var(--gold); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* INTERFAZ DE LUJO */
-.luxury-interface {
-    height: 100vh; width: 100vw; position: relative;
-    background: radial-gradient(circle at center, #ffffff 0%, #fce4ec 100%);
-    overflow: hidden; display: flex; align-items: center; justify-content: center;
+/* Escenario con aceleración por hardware */
+.main-stage {
+    height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle, #fff 0%, #fce4ec 100%);
+    position: relative;
+    will-change: transform; /* Avisa al navegador que habrá animaciones */
 }
 
-.paper-texture {
-    position: absolute; width: 100%; height: 100%;
-    background-image: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
-    opacity: 0.3; pointer-events: none;
+#goldCanvas {
+    position: absolute; inset: 0; z-index: 1;
 }
 
-/* MARCOS DORADOS */
-.outer-frame {
-    position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-    border: 2px solid #d4af37; z-index: 10; padding: 5px;
-}
-.inner-frame {
-    width: 100%; height: 100%; border: 1px solid #d4af37; opacity: 0.5;
+.content-box {
+    position: relative; z-index: 2; text-align: center; padding: 20px;
 }
 
-/* TIPOGRAFÍA ELABORADA */
-.label-gold {
-    font-family: 'Pinyon Script', cursive; font-size: 3.5rem;
-    background: var(--gold-main); -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; margin: 0;
+.nombre {
+    font-family: 'Pinyon Script', cursive;
+    font-size: clamp(3.5rem, 12vw, 6rem);
+    color: var(--pink); margin: -20px 0 20px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
-.main-name {
-    font-family: 'Pinyon Script', cursive; color: var(--pink-dark);
-    font-size: clamp(4rem, 15vw, 6rem); margin: -30px 0 20px 0;
-    text-shadow: 2px 5px 15px rgba(136, 14, 79, 0.2);
+.mis-xv {
+    font-family: 'Pinyon Script', cursive;
+    background: var(--gold); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; font-size: 2.5rem;
 }
 
-/* CONTADOR PREMIUM */
-.premium-timer {
-    display: flex; gap: 15px; background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(15px); padding: 25px; border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+/* Temporizador optimizado: Sin Blur excesivo */
+.timer {
+    display: flex; gap: 10px; justify-content: center;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 15px; border-radius: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
-.timer-block b { font-size: 1.8rem; color: #a67c00; display: block; }
-.timer-block span { font-size: 0.6rem; letter-spacing: 2px; color: #880e4f; }
+.timer div b { font-size: 1.4rem; color: #b38728; display: block; }
 
-/* BOTÓN DE LUJO */
-.btn-royal-confirm {
-    position: relative; background: var(--pink-dark); color: white;
-    padding: 20px 50px; border-radius: 100px; text-decoration: none;
-    font-weight: bold; overflow: hidden; display: inline-block;
-    box-shadow: 0 10px 30px rgba(136, 14, 79, 0.4); transition: var(--transition-smooth);
+.btn-lujo {
+    background: var(--pink); color: #fff;
+    padding: 15px 35px; border-radius: 50px;
+    text-decoration: none; font-weight: bold;
+    display: inline-block; margin-top: 25px;
+    box-shadow: 0 5px 15px rgba(173, 20, 87, 0.3);
 }
 
-.flare {
-    position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: shine 4s infinite linear;
+/* Animación ligera */
+.fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
-@keyframes shine { to { left: 150%; } }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translate3d(0, 20px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
