@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Venus Margarita - Rose Gold & Gold Gala</title>
+    <title>XV Venus Margarita - Gala Rose Gold</title>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -29,11 +29,10 @@
             animation: pulse 2s infinite;
         }
 
-        /* Canvas de Brillos */
         canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
 
-        /* Estilos Generales */
         section { min-height: 100vh; padding: 100px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 10; text-align: center; }
+        
         .nombre { font-family: 'Pinyon Script', cursive; font-size: clamp(4.5rem, 18vw, 8rem); color: var(--rosa-fuerte); margin: 20px 0; line-height: 1; }
         .serif-gold { font-family: 'Cinzel', serif; color: var(--oro-solido); letter-spacing: 4px; font-size: 0.8rem; margin-bottom: 10px; }
 
@@ -43,15 +42,14 @@
         .bloque b { display: block; font-family: 'Cinzel'; font-size: 1.8rem; color: var(--oro-solido); }
         .bloque span { font-size: 0.6rem; letter-spacing: 1px; }
 
-        /* Tarjetas Premium */
+        /* Tarjetas */
         .card {
             background: white; border: 1px solid var(--rosa-vestido); padding: 50px 30px;
-            width: 100%; max-width: 500px; margin: 30px 0; position: relative;
+            width: 100%; max-width: 500px; margin: 20px 0; position: relative;
             box-shadow: 0 20px 40px rgba(0,0,0,0.03);
         }
         .card::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(179, 135, 40, 0.2); pointer-events: none; }
 
-        /* Botones */
         .btn-confirmar {
             background: #25d366; color: white; padding: 20px 40px; text-decoration: none;
             font-weight: bold; border-radius: 50px; display: inline-block; margin-top: 30px;
@@ -62,7 +60,7 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: 1.5s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
     </style>
 </head>
 <body>
@@ -98,44 +96,35 @@
 
         <section>
             <div class="card reveal">
-                <h2 class="serif-gold" style="font-size: 1.5rem;">Mi Madre</h2>
-                <p style="margin: 15px 0; font-weight: bold;"> Nombre de la Madre</p>
-                <div style="margin: 30px 0;"></div>
-                <h2 class="serif-gold" style="font-size: 1.5rem;">Mis Padrinos</h2>
-                <p style="margin: 15px 0; font-weight: bold;">Nombre del Padrino & Nombre de la Madrina</p>
-            </div>
-        </section>
-
-        <section>
-            <div class="card reveal">
-                <p class="serif-gold">LA CELEBRACIÓN</p>
+                <p class="serif-gold">LA RECEPCIÓN</p>
                 <h3 style="font-family: 'Cinzel'; margin: 15px 0;">ALEMARFER RECEPCIONES</h3>
                 <p style="font-size: 0.9rem;">Av. Francisco I. Madero 1803, Primero de Mayo<br>Río Bravo, Tamaulipas</p>
                 <p style="margin-top: 20px; font-weight: bold;">07:00 PM</p>
-                <a href="https://www.google.com/maps/search/ALEMARFER+RECEPCIONES+Rio+Bravo" target="_blank" style="color: var(--oro-solido); display: block; margin-top: 20px;">VER MAPA INTERACTIVO</a>
+                <a href="https://maps.google.com/?q=Alemarfer+Recepciones+Rio+Bravo" target="_blank" style="color: var(--oro-solido); display: block; margin-top: 20px; font-weight: bold; text-decoration: none;">VER UBICACIÓN</a>
             </div>
         </section>
 
         <section style="background: rgba(244, 194, 194, 0.1);">
-            <div class="reveal" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-                <div class="card" style="flex: 1; min-width: 300px;">
+            <div class="reveal">
+                <div class="card">
                     <p class="serif-gold">CÓDIGO DE VESTIMENTA</p>
-                    <p style="font-size: 1.5rem; margin: 15px 0;">👔 👗</p>
-                    <p><b>FORMAL / GALA</b></p>
-                    <p style="font-size: 0.8rem; margin-top: 10px;"></p>
+                    <p style="font-size: 1.8rem; margin: 15px 0;">✨</p>
+                    <p style="font-family: 'Cinzel'; letter-spacing: 5px; font-size: 1.2rem;"><b>GALA</b></p>
                 </div>
-                <div class="card" style="flex: 1; min-width: 300px; border-style: dashed;">
-                    <p class="serif-gold">LLUVIA DE SOBRES</p>
-                    <p style="font-size: 1.5rem; margin: 15px 0;">✉️</p>
-                    <p>Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo, contaré con una urna para sobres.</p>
+                
+                <div class="card" style="border-style: dashed;">
+                    <p class="serif-gold">PRESENTES</p>
+                    <p style="font-size: 1.8rem; margin: 15px 0;">🎁 ✉️</p>
+                    <p>Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo, puede ser en:</p>
+                    <p style="margin-top: 15px; font-weight: bold; color: var(--oro-solido); letter-spacing: 2px;">REGALO O SOBRE</p>
                 </div>
             </div>
         </section>
 
         <section>
             <div class="reveal">
-                <h2 style="font-family: 'Pinyon Script'; font-size: 3rem; color: var(--rosa-fuerte);">¿Contamos contigo?</h2>
-                <p style="letter-spacing: 3px; margin-top: 10px;">FAVOR DE CONFIRMAR ANTES DEL 1 DE JULIO</p>
+                <h2 style="font-family: 'Pinyon Script'; font-size: 3.5rem; color: var(--rosa-fuerte);">¿Nos acompañas?</h2>
+                <p style="letter-spacing: 3px; margin: 20px 0;">FAVOR DE CONFIRMAR ANTES DEL 1 DE JULIO</p>
                 <a href="https://wa.me/528991075898?text=Hola%20Venus!%20Confirmo%20mi%20asistencia%20a%20tu%20fiesta" class="btn-confirmar">
                     CONFIRMAR POR WHATSAPP
                 </a>
@@ -153,7 +142,6 @@
             }, 1000);
         }
 
-        // Cuenta Regresiva
         const target = new Date("July 18, 2026 19:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -169,7 +157,6 @@
             `;
         }, 1000);
 
-        // Partículas Rose Gold
         const canvas = document.getElementById('stars');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
