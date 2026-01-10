@@ -4,42 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XV Venus Margarita</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --pink: #ad1457; --gold: #d4af37; --light-pink: #fce4ec; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--light-pink); color: #333; overflow-x: hidden; text-align: center; }
+
+        /* Pantalla de Entrada para Activar Música */
+        #entrada {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; z-index: 1000; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; cursor: pointer;
+        }
+
+        /* Flores en las esquinas (SVG para que no pesen ni se rompan) */
+        .flower { position: absolute; width: 150px; fill: var(--pink); opacity: 0.2; z-index: 1; }
+        .top-left { top: -20px; left: -20px; transform: rotate(0deg); }
+        .bottom-right { bottom: -20px; right: -20px; transform: rotate(180deg); }
+
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; padding: 20px; }
+        .nombre { font-family: 'Pinyon Script', cursive; font-size: 5rem; color: var(--pink); margin: 20px 0; }
+        .mis-xv { font-family: 'Pinyon Script', cursive; font-size: 2.5rem; color: var(--gold); }
+        
+        .section { padding: 60px 20px; position: relative; z-index: 10; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 30px; border: 1px solid var(--gold); }
+        
+        .btn { background: var(--pink); color: white; padding: 15px 30px; text-decoration: none; border-radius: 25px; display: inline-block; margin-top: 15px; font-weight: bold; transition: 0.3s; }
+        .btn:hover { transform: scale(1.05); background: #880e4f; }
+
+        .gift-container { display: flex; justify-content: space-around; margin-top: 20px; }
+        .gift-item { flex: 1; padding: 10px; }
+        .icon { font-size: 2rem; margin-bottom: 10px; }
+
+        /* Partículas de brillo */
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; }
+        
+        /* Ocultar el video de YouTube */
+        #player { position: absolute; top: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; }
+    </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="monograma">V</div>
+    <div id="entrada" onclick="reproducirMúsica()">
+        <h1 style="font-family: 'Pinyon Script'; font-size: 4rem; color: var(--pink);">V</h1>
+        <p>Toca para abrir la invitación</p>
+        <small>(Y escuchar la música)</small>
     </div>
 
-    <div class="main-stage">
-        <canvas id="goldCanvas"></canvas>
-        
-        <div class="content-box">
-            <header class="fade-in">
-                <p class="poema">"Un sueño que comienza, un instante eterno..."</p>
-                <h2 class="mis-xv">Mis XV</h2>
-                <h1 class="nombre">Venus Margarita</h1>
-            </header>
+    <div id="player"></div>
 
-            <div id="countdown" class="timer"></div>
+    <div id="particles-js"></div>
 
-            <div class="info fade-in">
-                <div class="fecha-wrap">
-                    <span class="oro-line"></span>
-                    <p>Sábado 18 de Julio, 2026</p>
-                    <span class="oro-line"></span>
-                </div>
-                <p class="hora">07:00 PM</p>
-            </div>
+    <section class="hero">
+        <svg class="flower top-left" viewBox="0 0 100 100"><path d="M50 0C55 20 75 25 100 25C80 30 75 50 75 75C70 55 50 50 25 50C45 45 50 25 50 0Z"/></svg>
+        <p class="mis-xv">Mis XV Años</p>
+        <h1 class="nombre">Venus Margarita</h1>
+        <p style="letter-spacing: 4px;">18 DE JULIO DE 2026</p>
+        <svg class="flower bottom-right" viewBox="0 0 100 100"><path d="M50 0C55 20 75 25 100 25C80 30 75 50 75 75C70 55 50 50 25 50C45 45 50 25 50 0Z"/></svg>
+    </section>
 
-            <footer class="fade-in">
-                <a href="https://wa.me/tu-numero" class="btn-lujo">CONFIRMAR ASISTENCIA</a>
-            </footer>
+    <section class="section">
+        <div class="card">
+            <h2 class="mis-xv" style="font-size: 2rem;">Lugar del Evento</h2>
+            <p style="font-weight: bold; color: var(--pink); margin: 10px 0;">ALEMARFER - RECEPCIONES</p>
+            <p>Av Francisco I. Madero 1803, Primero de Mayo</p>
+            <p>Río Bravo, Tamaulipas</p>
+            <a href="https://maps.google.com/?q=Alemarfer+-+Recepciones" target="_blank" class="btn">VER UBICACIÓN</a>
         </div>
-    </div>
 
-    <script src="script.js"></script>
+        <div class="card">
+            <h2 class="mis-xv" style="font-size: 2rem;">Muestra de Cariño</h2>
+            <p>Tu presencia es lo más importante, pero si deseas hacerme un presente:</p>
+            <div class="gift-container">
+                <div class="gift-item">
+                    <div class="icon">🎁</div>
+                    <p><b>Regalo</b></p>
+                    <p style="font-size: 0.8rem;">Mesa de regalos en Liverpool</p>
+                </div>
+                <div class="gift-item">
+                    <div class="icon">✉️</div>
+                    <p><b>Sobre</b></p>
+                    <p style="font-size: 0.8rem;">Lluvia de sobres en la entrada</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://wa.me/521XXXXXXXXXX?text=Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Venus" class="btn">CONFIRMAR ASISTENCIA</a>
+    </section>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0', width: '0',
+                videoId: 'U-fU6t3X5oY', // ID de Falling Again - KLANG
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'U-fU6t3X5oY' },
+                events: { 'onReady': onPlayerReady }
+            });
+        }
+        function onPlayerReady(event) {
+            // El reproductor está listo pero pausado por el navegador
+        }
+
+        function reproducirMúsica() {
+            player.playVideo();
+            document.getElementById('entrada').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
