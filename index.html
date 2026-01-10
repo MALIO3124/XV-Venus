@@ -2,115 +2,153 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>XV Venus Margarita</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --pink: #ad1457; --gold: #d4af37; --light-pink: #fce4ec; }
+        :root { --p: #ad1457; --g: #d4af37; --bg: #fffafb; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--light-pink); color: #333; overflow-x: hidden; text-align: center; }
-
-        /* Pantalla de Entrada para Activar Música */
-        #entrada {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; z-index: 1000; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; cursor: pointer;
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: var(--bg); 
+            color: #333; 
+            text-align: center;
+            overflow-x: hidden;
         }
 
-        /* Flores en las esquinas (SVG para que no pesen ni se rompan) */
-        .flower { position: absolute; width: 150px; fill: var(--pink); opacity: 0.2; z-index: 1; }
-        .top-left { top: -20px; left: -20px; transform: rotate(0deg); }
-        .bottom-right { bottom: -20px; right: -20px; transform: rotate(180deg); }
+        /* Pantalla de Inicio - Garantiza que se abra y suene */
+        #sobre-entrada {
+            position: fixed; inset: 0; background: #fff; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            cursor: pointer; transition: 0.6s ease-in-out;
+        }
 
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; padding: 20px; }
-        .nombre { font-family: 'Pinyon Script', cursive; font-size: 5rem; color: var(--pink); margin: 20px 0; }
-        .mis-xv { font-family: 'Pinyon Script', cursive; font-size: 2.5rem; color: var(--gold); }
-        
-        .section { padding: 60px 20px; position: relative; z-index: 10; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 30px; border: 1px solid var(--gold); }
-        
-        .btn { background: var(--pink); color: white; padding: 15px 30px; text-decoration: none; border-radius: 25px; display: inline-block; margin-top: 15px; font-weight: bold; transition: 0.3s; }
-        .btn:hover { transform: scale(1.05); background: #880e4f; }
+        .sobre-v {
+            font-family: 'Pinyon Script', cursive; font-size: 5rem; color: var(--p);
+            border: 2px solid var(--g); border-radius: 50%; width: 120px; height: 120px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+        }
 
-        .gift-container { display: flex; justify-content: space-around; margin-top: 20px; }
-        .gift-item { flex: 1; padding: 10px; }
-        .icon { font-size: 2rem; margin-bottom: 10px; }
-
-        /* Partículas de brillo */
-        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; }
+        /* Estilo General */
+        section { padding: 60px 20px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
         
-        /* Ocultar el video de YouTube */
-        #player { position: absolute; top: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; }
+        .oro { font-family: 'Pinyon Script', cursive; color: var(--g); font-size: 2.5rem; }
+        .nombre { font-family: 'Pinyon Script', cursive; color: var(--p); font-size: 5rem; line-height: 1; margin: 10px 0; }
+        
+        .card { 
+            background: #fff; padding: 35px 25px; border-radius: 2px; 
+            border: 1px solid var(--g); box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin: 20px auto; max-width: 400px; position: relative;
+        }
+
+        /* Esquinas de Oro (Sustituyen fotos rotas) */
+        .esquina { position: absolute; width: 30px; height: 30px; border: 2px solid var(--g); }
+        .tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+        .br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+
+        .btn { 
+            background: var(--p); color: #fff; padding: 18px 40px; 
+            text-decoration: none; border-radius: 50px; display: inline-block;
+            font-weight: bold; margin-top: 25px; letter-spacing: 2px;
+            box-shadow: 0 10px 20px rgba(173, 20, 87, 0.3);
+        }
+
+        .regalos { display: flex; gap: 15px; margin-top: 25px; }
+        .regalo-item { flex: 1; border: 1px dashed var(--g); padding: 15px; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <div id="entrada" onclick="reproducirMúsica()">
-        <h1 style="font-family: 'Pinyon Script'; font-size: 4rem; color: var(--pink);">V</h1>
-        <p>Toca para abrir la invitación</p>
-        <small>(Y escuchar la música)</small>
+    <div id="sobre-entrada" onclick="abrirInvitacion()">
+        <div class="sobre-v">V</div>
+        <p style="letter-spacing: 3px; color: var(--g); font-weight: bold;">TOCA PARA ABRIR</p>
+        <p style="font-size: 0.7rem; margin-top: 5px;">Música: Falling Again - KLANG</p>
     </div>
 
-    <div id="player"></div>
+    <audio id="musica" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_90313f044d.mp3" type="audio/mpeg">
+    </audio>
 
-    <div id="particles-js"></div>
-
-    <section class="hero">
-        <svg class="flower top-left" viewBox="0 0 100 100"><path d="M50 0C55 20 75 25 100 25C80 30 75 50 75 75C70 55 50 50 25 50C45 45 50 25 50 0Z"/></svg>
-        <p class="mis-xv">Mis XV Años</p>
-        <h1 class="nombre">Venus Margarita</h1>
-        <p style="letter-spacing: 4px;">18 DE JULIO DE 2026</p>
-        <svg class="flower bottom-right" viewBox="0 0 100 100"><path d="M50 0C55 20 75 25 100 25C80 30 75 50 75 75C70 55 50 50 25 50C45 45 50 25 50 0Z"/></svg>
+    <section>
+        <div class="reveal">
+            <p class="oro">Mis XV Años</p>
+            <h1 class="nombre">Venus Margarita</h1>
+            <p style="letter-spacing: 5px; font-weight: 300;">18 • JULIO • 2026</p>
+            <div style="margin-top: 50px; font-size: 0.8rem; color: #8a6d3b;">
+                "Falling again into this dream..."
+            </div>
+        </div>
     </section>
 
-    <section class="section">
-        <div class="card">
-            <h2 class="mis-xv" style="font-size: 2rem;">Lugar del Evento</h2>
-            <p style="font-weight: bold; color: var(--pink); margin: 10px 0;">ALEMARFER - RECEPCIONES</p>
-            <p>Av Francisco I. Madero 1803, Primero de Mayo</p>
-            <p>Río Bravo, Tamaulipas</p>
-            <a href="https://maps.google.com/?q=Alemarfer+-+Recepciones" target="_blank" class="btn">VER UBICACIÓN</a>
+    <section>
+        <div class="card reveal">
+            <div class="esquina tl"></div>
+            <div class="esquina br"></div>
+            <h2 class="oro" style="font-size: 2rem;">Lugar del Evento</h2>
+            <p style="margin: 15px 0; font-weight: bold; color: var(--p);">ALEMARFER - RECEPCIONES</p>
+            <p style="font-size: 0.9rem; line-height: 1.6;">
+                Av. Francisco I. Madero 1803<br>
+                Primero de Mayo, Río Bravo, Tamps.
+            </p>
+            <a href="https://maps.google.com/?q=Alemarfer+Recepciones+Rio+Bravo" target="_blank" class="btn">VER MAPA</a>
         </div>
 
-        <div class="card">
-            <h2 class="mis-xv" style="font-size: 2rem;">Muestra de Cariño</h2>
-            <p>Tu presencia es lo más importante, pero si deseas hacerme un presente:</p>
-            <div class="gift-container">
-                <div class="gift-item">
-                    <div class="icon">🎁</div>
-                    <p><b>Regalo</b></p>
-                    <p style="font-size: 0.8rem;">Mesa de regalos en Liverpool</p>
+        <div class="card reveal" style="margin-top: 40px;">
+            <h2 class="oro" style="font-size: 2rem;">Muestra de Cariño</h2>
+            <p style="font-size: 0.85rem; margin-top: 10px;">Tu presencia es el mejor regalo, pero si deseas tener un detalle:</p>
+            <div class="regalos">
+                <div class="regalo-item">
+                    <span>🎁</span><br><b>Regalo</b>
                 </div>
-                <div class="gift-item">
-                    <div class="icon">✉️</div>
-                    <p><b>Sobre</b></p>
-                    <p style="font-size: 0.8rem;">Lluvia de sobres en la entrada</p>
+                <div class="regalo-item">
+                    <span>✉️</span><br><b>Sobre</b>
                 </div>
             </div>
         </div>
 
-        <a href="https://wa.me/521XXXXXXXXXX?text=Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Venus" class="btn">CONFIRMAR ASISTENCIA</a>
+        <div class="reveal" style="margin-top: 40px;">
+            <p>Confirma tu asistencia antes del 1 de Julio</p>
+            <a href="https://wa.me/521XXXXXXXXXX?text=Hola!%20Confirmo%20asistencia%20a%20los%20XV%20de%20Venus" class="btn" style="background: #25d366;">CONFIRMAR POR WHATSAPP</a>
+        </div>
     </section>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0', width: '0',
-                videoId: 'U-fU6t3X5oY', // ID de Falling Again - KLANG
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'U-fU6t3X5oY' },
-                events: { 'onReady': onPlayerReady }
-            });
-        }
-        function onPlayerReady(event) {
-            // El reproductor está listo pero pausado por el navegador
+        function abrirInvitacion() {
+            // Reproducir música
+            const audio = document.getElementById('musica');
+            audio.play().catch(e => console.log("Audio bloqueado"));
+            
+            // Quitar pantalla de inicio
+            const entrada = document.getElementById('sobre-entrada');
+            entrada.style.opacity = '0';
+            setTimeout(() => {
+                entrada.style.display = 'none';
+                reveal(); // Iniciar animaciones
+            }, 600);
         }
 
-        function reproducirMúsica() {
-            player.playVideo();
-            document.getElementById('entrada').style.display = 'none';
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(r => {
+                let windowHeight = window.innerHeight;
+                let elementTop = r.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    r.classList.add("active");
+                }
+            });
         }
+
+        window.addEventListener("scroll", reveal);
+        // Evitar que el scroll funcione antes de abrir
+        document.addEventListener('touchmove', function(e) {
+            if(document.getElementById('sobre-entrada').style.display !== 'none') {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
