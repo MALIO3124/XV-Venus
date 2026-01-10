@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Venus Margarita - Gala Rose Gold</title>
+    <title>XV Venus Margarita - Rose Gold & Gala</title>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --rosa-vestido: #f4c2c2;
             --rosa-fuerte: #e09393;
-            --oro: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fcf6ba, #aa771c);
             --oro-solido: #b38728;
             --dark-text: #5d4037;
         }
@@ -66,15 +65,15 @@
 <body>
 
     <div id="intro" onclick="iniciarGala()">
-        <p class="serif-gold">CON AMOR PRESENTA</p>
-        <div class="btn-abrir">Abrir Invitación</div>
+        <p class="serif-gold">BIENVENIDOS A LA GALA DE</p>
+        <div class="btn-abrir">Venus Margarita</div>
     </div>
 
     <audio id="musica" loop>
         <source src="https://files.catbox.moe/o634v1.mp3" type="audio/mpeg">
     </audio>
 
-    <canvas id="stars"></canvas>
+    <canvas id="canvas-efectos"></canvas>
 
     <div class="main-content">
         <section>
@@ -82,7 +81,7 @@
                 <p class="serif-gold">MIS QUINCE AÑOS</p>
                 <h1 class="nombre">Venus Margarita</h1>
                 <div class="reloj" id="timer"></div>
-                <p style="font-weight: 700; letter-spacing: 4px; color: var(--oro-solido);">SÁBADO 18 DE JULIO • 2026</p>
+                <p style="font-weight: 700; letter-spacing: 4px; color: var(--oro-solido);">18 DE JULIO • 2026</p>
             </div>
         </section>
 
@@ -90,17 +89,27 @@
             <div class="reveal">
                 <p class="poema">"Existen momentos en la vida que imaginamos, soñamos y esperamos; uno de esos momentos ha llegado..."</p>
                 <div style="height: 1px; width: 80px; background: var(--oro-solido); margin: 30px auto;"></div>
-                <p class="poema">"Con la bendición de Dios, el amor y apoyo que mi familia me ha dado, quiero que compartas conmigo esta noche tan especial, pues son parte de mi vida y deseo que compartan la alegría de este día conmigo."</p>
+                <p class="poema">"Con la bendición de Dios, el amor y apoyo que mi familia me ha dado, quiero que compartas conmigo esta noche tan especial..."</p>
             </div>
         </section>
 
         <section>
             <div class="card reveal">
-                <p class="serif-gold">LA RECEPCIÓN</p>
+                <p class="serif-gold">CEREMONIA RELIGIOSA</p>
+                <p style="font-size: 1.8rem; margin: 15px 0;">⛪</p>
+                <h3 style="font-family: 'Cinzel'; margin: 10px 0;">[NOMBRE DE LA IGLESIA]</h3>
+                <p style="font-size: 0.9rem; margin-top: 10px;">La ubicación se actualizará próximamente.</p>
+                <p style="margin-top: 20px; font-weight: bold; color: var(--oro-solido);">HORARIO POR CONFIRMAR</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="card reveal">
+                <p class="serif-gold">RECEPCIÓN DE GALA</p>
                 <h3 style="font-family: 'Cinzel'; margin: 15px 0;">ALEMARFER RECEPCIONES</h3>
                 <p style="font-size: 0.9rem;">Av. Francisco I. Madero 1803, Primero de Mayo<br>Río Bravo, Tamaulipas</p>
-                <p style="margin-top: 20px; font-weight: bold;">07:00 PM</p>
-                <a href="https://maps.google.com/?q=Alemarfer+Recepciones+Rio+Bravo" target="_blank" style="color: var(--oro-solido); display: block; margin-top: 20px; font-weight: bold; text-decoration: none;">VER UBICACIÓN</a>
+                <p style="margin-top: 20px; font-weight: bold; color: var(--rosa-fuerte);">07:00 PM</p>
+                <a href="https://maps.app.goo.gl/..." target="_blank" style="color: var(--oro-solido); display: block; margin-top: 20px; font-weight: bold; text-decoration: none;">ABRIR EN GOOGLE MAPS</a>
             </div>
         </section>
 
@@ -108,14 +117,14 @@
             <div class="reveal">
                 <div class="card">
                     <p class="serif-gold">CÓDIGO DE VESTIMENTA</p>
-                    <p style="font-size: 1.8rem; margin: 15px 0;">✨</p>
-                    <p style="font-family: 'Cinzel'; letter-spacing: 5px; font-size: 1.2rem;"><b>GALA</b></p>
+                    <p style="font-family: 'Cinzel'; letter-spacing: 5px; font-size: 1.5rem; margin-top: 15px;"><b>GALA</b></p>
+                    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;">Traje formal o de noche</p>
                 </div>
                 
                 <div class="card" style="border-style: dashed;">
-                    <p class="serif-gold">PRESENTES</p>
+                    <p class="serif-gold">MUESTRA DE CARIÑO</p>
                     <p style="font-size: 1.8rem; margin: 15px 0;">🎁 ✉️</p>
-                    <p>Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo, puede ser en:</p>
+                    <p>Si deseas obsequiarme algo, puede ser en:</p>
                     <p style="margin-top: 15px; font-weight: bold; color: var(--oro-solido); letter-spacing: 2px;">REGALO O SOBRE</p>
                 </div>
             </div>
@@ -124,10 +133,14 @@
         <section>
             <div class="reveal">
                 <h2 style="font-family: 'Pinyon Script'; font-size: 3.5rem; color: var(--rosa-fuerte);">¿Nos acompañas?</h2>
-                <p style="letter-spacing: 3px; margin: 20px 0;">FAVOR DE CONFIRMAR ANTES DEL 1 DE JULIO</p>
+                <p style="letter-spacing: 3px; margin: 20px 0;">CONFIRMAR ANTES DEL 1 DE JULIO</p>
                 <a href="https://wa.me/528991075898?text=Hola%20Venus!%20Confirmo%20mi%20asistencia%20a%20tu%20fiesta" class="btn-confirmar">
-                    CONFIRMAR POR WHATSAPP
+                    CONFIRMAR ASISTENCIA
                 </a>
+            </div>
+            
+            <div class="reveal" style="margin-top: 80px; opacity: 0.6;">
+                <p style="font-family: 'Pinyon Script'; font-size: 2rem;">Gracias por ser parte de mi historia.</p>
             </div>
         </section>
     </div>
@@ -142,6 +155,7 @@
             }, 1000);
         }
 
+        // Cuenta Regresiva
         const target = new Date("July 18, 2026 19:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -157,17 +171,39 @@
             `;
         }, 1000);
 
-        const canvas = document.getElementById('stars');
+        // EFECTO ESPECIAL: Pétalos y Brillos
+        const canvas = document.getElementById('canvas-efectos');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        for(let i=0; i<80; i++) particles.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*2, o: Math.random()});
+        
+        let elementos = [];
+        for(let i=0; i<50; i++) {
+            elementos.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2 + 1, // Tamaño
+                v: Math.random() * 1 + 0.5, // Velocidad
+                a: Math.random() * 0.02, // Oscilación
+                tipo: Math.random() > 0.5 ? 'oro' : 'petalo'
+            });
+        }
+
         function animate() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = "rgba(179, 135, 40, 0.3)";
-            particles.forEach(p => {
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
-                p.y += 0.5; if(p.y > canvas.height) p.y = -10;
+            elementos.forEach(p => {
+                if(p.tipo === 'oro') {
+                    ctx.fillStyle = "rgba(179, 135, 40, 0.4)";
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+                } else {
+                    ctx.fillStyle = "rgba(244, 194, 194, 0.6)";
+                    ctx.beginPath();
+                    ctx.ellipse(p.x, p.y, p.r * 2, p.r * 3, Math.PI/4, 0, Math.PI*2);
+                    ctx.fill();
+                }
+                
+                p.y += p.v;
+                p.x += Math.sin(p.y * 0.01) * 0.5;
+                if(p.y > canvas.height) p.y = -20;
             });
             requestAnimationFrame(animate);
         }
@@ -176,7 +212,7 @@
         function reveal() {
             const revs = document.querySelectorAll(".reveal");
             revs.forEach(r => {
-                if(r.getBoundingClientRect().top < window.innerHeight - 100) r.classList.add("active");
+                if(r.getBoundingClientRect().top < window.innerHeight - 80) r.classList.add("active");
             });
         }
         window.addEventListener("scroll", reveal);
