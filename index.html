@@ -2,153 +2,189 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>XV Venus Margarita</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XV Venus Margarita - Rose Gold Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --p: #ad1457; --g: #d4af37; --bg: #fffafb; }
+        :root {
+            --rosa-vestido: #f4c2c2; /* Rosa suave del vestido */
+            --rosa-fuerte: #e09393;
+            --oro: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fcf6ba, #aa771c);
+            --oro-solido: #b38728;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body { 
+            background-color: #fff5f5; 
             font-family: 'Montserrat', sans-serif; 
-            background: var(--bg); 
-            color: #333; 
-            text-align: center;
+            color: #5d4037; 
             overflow-x: hidden;
+            text-align: center;
         }
 
-        /* Pantalla de Inicio - Garantiza que se abra y suene */
-        #sobre-entrada {
-            position: fixed; inset: 0; background: #fff; z-index: 10000;
+        /* Pantalla de Inicio para Activar Música */
+        #intro {
+            position: fixed; inset: 0; background: white; z-index: 10000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            cursor: pointer; transition: 0.6s ease-in-out;
+            cursor: pointer;
+        }
+        .boton-invitacion {
+            padding: 20px 40px; border: 2px solid var(--oro-solido);
+            font-family: 'Pinyon Script', cursive; font-size: 2.5rem; color: var(--rosa-fuerte);
+            border-radius: 50px; transition: 0.3s;
         }
 
-        .sobre-v {
-            font-family: 'Pinyon Script', cursive; font-size: 5rem; color: var(--p);
-            border: 2px solid var(--g); border-radius: 50%; width: 120px; height: 120px;
-            display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+        /* Fondo de Brillos Oro */
+        canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+
+        /* Contenedor Principal */
+        .content { position: relative; z-index: 10; width: 100%; }
+
+        section { min-height: 100vh; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        /* Estilos de Texto */
+        .nombre { 
+            font-family: 'Pinyon Script', cursive; font-size: clamp(4rem, 15vw, 7rem); 
+            color: var(--rosa-fuerte); margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .poema { 
+            max-width: 550px; line-height: 2; font-style: italic; font-size: 1.1rem; 
+            color: #8d6e63; margin: 40px 0; padding: 20px;
+            border-top: 1px solid var(--rosa-vestido); border-bottom: 1px solid var(--rosa-vestido);
         }
 
-        /* Estilo General */
-        section { padding: 60px 20px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
-        
-        .oro { font-family: 'Pinyon Script', cursive; color: var(--g); font-size: 2.5rem; }
-        .nombre { font-family: 'Pinyon Script', cursive; color: var(--p); font-size: 5rem; line-height: 1; margin: 10px 0; }
-        
-        .card { 
-            background: #fff; padding: 35px 25px; border-radius: 2px; 
-            border: 1px solid var(--g); box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin: 20px auto; max-width: 400px; position: relative;
+        /* Cuenta Regresiva */
+        .reloj { display: flex; gap: 10px; margin-top: 30px; }
+        .bloque { 
+            background: white; border: 1px solid var(--oro-solido); 
+            padding: 15px; min-width: 75px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .bloque b { display: block; font-size: 1.8rem; color: var(--oro-solido); }
+        .bloque span { font-size: 0.7rem; letter-spacing: 1px; }
+
+        /* Tarjetas */
+        .card {
+            background: white; border: 1px solid var(--rosa-vestido);
+            padding: 40px 20px; width: 100%; max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 40px;
+        }
+        .btn-accion {
+            background: var(--oro); color: #5d4037; text-decoration: none;
+            padding: 15px 30px; display: inline-block; margin-top: 20px;
+            font-weight: bold; letter-spacing: 2px; border-radius: 5px;
         }
 
-        /* Esquinas de Oro (Sustituyen fotos rotas) */
-        .esquina { position: absolute; width: 30px; height: 30px; border: 2px solid var(--g); }
-        .tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
-        .br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
-
-        .btn { 
-            background: var(--p); color: #fff; padding: 18px 40px; 
-            text-decoration: none; border-radius: 50px; display: inline-block;
-            font-weight: bold; margin-top: 25px; letter-spacing: 2px;
-            box-shadow: 0 10px 20px rgba(173, 20, 87, 0.3);
-        }
-
-        .regalos { display: flex; gap: 15px; margin-top: 25px; }
-        .regalo-item { flex: 1; border: 1px dashed var(--g); padding: 15px; }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <div id="sobre-entrada" onclick="abrirInvitacion()">
-        <div class="sobre-v">V</div>
-        <p style="letter-spacing: 3px; color: var(--g); font-weight: bold;">TOCA PARA ABRIR</p>
-        <p style="font-size: 0.7rem; margin-top: 5px;">Música: Falling Again - KLANG</p>
+    <div id="intro" onclick="iniciar()">
+        <p style="letter-spacing: 5px; margin-bottom: 20px;">BIENVENIDOS</p>
+        <div class="boton-invitacion">Abrir Invitación</div>
+        <p style="margin-top: 20px; font-size: 0.7rem;">Música: Falling Again - KLANG</p>
     </div>
 
     <audio id="musica" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_90313f044d.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/o634v1.mp3" type="audio/mpeg">
     </audio>
 
-    <section>
-        <div class="reveal">
-            <p class="oro">Mis XV Años</p>
-            <h1 class="nombre">Venus Margarita</h1>
-            <p style="letter-spacing: 5px; font-weight: 300;">18 • JULIO • 2026</p>
-            <div style="margin-top: 50px; font-size: 0.8rem; color: #8a6d3b;">
-                "Falling again into this dream..."
+    <canvas id="brillos"></canvas>
+
+    <div class="content">
+        <section>
+            <div class="reveal">
+                <p style="letter-spacing: 8px;">MIS XV AÑOS</p>
+                <h1 class="nombre">Venus Margarita</h1>
+                <div class="reloj" id="contador"></div>
+                <p style="margin-top: 30px; font-weight: bold; letter-spacing: 3px;">18 DE JULIO DE 2026</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <div class="card reveal">
-            <div class="esquina tl"></div>
-            <div class="esquina br"></div>
-            <h2 class="oro" style="font-size: 2rem;">Lugar del Evento</h2>
-            <p style="margin: 15px 0; font-weight: bold; color: var(--p);">ALEMARFER - RECEPCIONES</p>
-            <p style="font-size: 0.9rem; line-height: 1.6;">
-                Av. Francisco I. Madero 1803<br>
-                Primero de Mayo, Río Bravo, Tamps.
-            </p>
-            <a href="https://maps.google.com/?q=Alemarfer+Recepciones+Rio+Bravo" target="_blank" class="btn">VER MAPA</a>
-        </div>
+        <section>
+            <div class="reveal poema">
+                "Existen momentos en la vida que imaginamos, soñamos y esperamos; uno de esos momentos ha llegado..."
+            </div>
+            <div class="reveal poema" style="border: none;">
+                "Con la bendición de Dios, el amor y apoyo que mi familia me ha dado, quiero que compartas conmigo esta noche tan especial, pues son parte de mi vida y deseo que compartan la alegría de este día conmigo."
+            </div>
+        </section>
 
-        <div class="card reveal" style="margin-top: 40px;">
-            <h2 class="oro" style="font-size: 2rem;">Muestra de Cariño</h2>
-            <p style="font-size: 0.85rem; margin-top: 10px;">Tu presencia es el mejor regalo, pero si deseas tener un detalle:</p>
-            <div class="regalos">
-                <div class="regalo-item">
-                    <span>🎁</span><br><b>Regalo</b>
-                </div>
-                <div class="regalo-item">
-                    <span>✉️</span><br><b>Sobre</b>
+        <section>
+            <div class="card reveal">
+                <h3 style="font-family: 'Pinyon Script'; font-size: 2.5rem; color: var(--oro-solido);">Lugar del Evento</h3>
+                <p style="margin: 15px 0; font-weight: bold;">ALEMARFER RECEPCIONES</p>
+                <p>Av. Francisco I. Madero 1803, Primero de Mayo<br>Río Bravo, Tamaulipas</p>
+                <a href="https://maps.google.com/?q=Alemarfer+-+Recepciones0" target="_blank" class="btn-accion">VER UBICACIÓN</a>
+            </div>
+
+            <div class="card reveal">
+                <h3 style="font-family: 'Pinyon Script'; font-size: 2.5rem; color: var(--oro-solido);">Muestra de Cariño</h3>
+                <p style="margin-top: 15px;">Tu presencia es mi mayor regalo, pero si deseas obsequiarme algo:</p>
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
+                    <div>🎁<br><small>REGALO</small></div>
+                    <div style="border-left: 1px solid #ccc; padding-left: 20px;">✉️<br><small>SOBRE</small></div>
                 </div>
             </div>
-        </div>
 
-        <div class="reveal" style="margin-top: 40px;">
-            <p>Confirma tu asistencia antes del 1 de Julio</p>
-            <a href="https://wa.me/521XXXXXXXXXX?text=Hola!%20Confirmo%20asistencia%20a%20los%20XV%20de%20Venus" class="btn" style="background: #25d366;">CONFIRMAR POR WHATSAPP</a>
-        </div>
-    </section>
+            <div class="reveal">
+                <a href="https://wa.me/521XXXXXXXXXX" class="btn-accion" style="background: #25d366; color: white;">CONFIRMAR ASISTENCIA</a>
+            </div>
+        </section>
+    </div>
 
     <script>
-        function abrirInvitacion() {
-            // Reproducir música
-            const audio = document.getElementById('musica');
-            audio.play().catch(e => console.log("Audio bloqueado"));
-            
-            // Quitar pantalla de inicio
-            const entrada = document.getElementById('sobre-entrada');
-            entrada.style.opacity = '0';
+        function iniciar() {
+            document.getElementById('musica').play();
+            document.getElementById('intro').style.opacity = '0';
             setTimeout(() => {
-                entrada.style.display = 'none';
-                reveal(); // Iniciar animaciones
-            }, 600);
+                document.getElementById('intro').style.display = 'none';
+                reveal();
+            }, 1000);
         }
+
+        // Cuenta Regresiva
+        const fecha = new Date("July 18, 2026 19:00:00").getTime();
+        setInterval(() => {
+            const ahora = new Date().getTime();
+            const d = Math.floor((fecha - ahora) / 86400000);
+            const h = Math.floor(((fecha - ahora) % 86400000) / 3600000);
+            const m = Math.floor(((fecha - ahora) % 3600000) / 60000);
+            const s = Math.floor(((fecha - ahora) % 60000) / 1000);
+            document.getElementById("contador").innerHTML = `
+                <div class="bloque"><b>${d}</b><span>DÍAS</span></div>
+                <div class="bloque"><b>${h}</b><span>HRS</span></div>
+                <div class="bloque"><b>${m}</b><span>MIN</span></div>
+                <div class="bloque"><b>${s}</b><span>SEG</span></div>
+            `;
+        }, 1000);
+
+        // Brillos de Oro
+        const canvas = document.getElementById('brillos');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particles = [];
+        for(let i=0; i<80; i++) particles.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*2, o: Math.random()});
+        function draw() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = "rgba(179, 135, 40, 0.4)";
+            particles.forEach(p => {
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+                p.y += 0.5; if(p.y > canvas.height) p.y = -10;
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
 
         function reveal() {
-            const reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(r => {
-                let windowHeight = window.innerHeight;
-                let elementTop = r.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 50) {
-                    r.classList.add("active");
-                }
+            const revs = document.querySelectorAll(".reveal");
+            revs.forEach(r => {
+                if(r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add("active");
             });
         }
-
         window.addEventListener("scroll", reveal);
-        // Evitar que el scroll funcione antes de abrir
-        document.addEventListener('touchmove', function(e) {
-            if(document.getElementById('sobre-entrada').style.display !== 'none') {
-                e.preventDefault();
-            }
-        }, { passive: false });
     </script>
 </body>
 </html>
