@@ -61,22 +61,25 @@
 
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         .boton-mapa {
-            background: #25d366; /* El verde de tu botón de confirmación */
-            color: white; 
-            padding: 20px 40px; 
+            background: transparent;
+            color: var(--oro-solido);
+            padding: 15px 30px;
             text-decoration: none;
-            font-weight: bold; 
-            border-radius: 50px; 
-            display: inline-block; 
-            margin-top: 30px;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); 
+            font-weight: bold;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 20px;
+            border: 1px solid var(--oro-solido);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
             transition: 0.3s;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .boton-mapa:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
+            background: var(--oro-solido);
+            color: white;
+            box-shadow: 0 10px 20px rgba(179, 135, 40, 0.2);
         }
     </style>
 </head>
@@ -112,16 +115,16 @@
         </section>
 
         <section>
-            <div class="card reveal">
-                <p class="serif-gold">CEREMONIA RELIGIOSA</p>
-                <p style="font-size: 1.8rem; margin: 15px 0;">⛪</p>
-                <h3 style="font-family: 'Cinzel'; margin: 10px 0;">PARROQUIA SAN MARTÍN DE PORRES</h3>
-                <p style="font-size: 0.9rem; margin-top: 10px;">Calle Coahuila y Oaxaca, Fracc. Río Bravo</p>
-                
-                <a href="https://maps.app.goo.gl/3" target="_blank" class="boton-mapa">
-                    VER UBICACIÓN EN MAPA
-                </a>
-            </div>
+           <div class="card reveal">
+    <p class="serif-gold">CEREMONIA RELIGIOSA</p>
+    <p style="font-size: 1.8rem; margin: 15px 0;">⛪</p>
+    <h3 style="font-family: 'Cinzel'; margin: 10px 0;">PARROQUIA SAN MARTÍN DE PORRES</h3>
+    <p style="font-size: 0.9rem;">Calle Coahuila y Oaxaca, Fracc. Río Bravo</p>
+    
+    <a href="https://maps.app.goo.gl/y2X8mH9Z7n6u8W1A9" target="_blank" class="boton-mapa">
+        ABRIR EN GOOGLE MAPS
+    </a>
+</div>
         </section>
         <section>
             <div class="card reveal">
