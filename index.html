@@ -69,9 +69,9 @@
         <div class="btn-abrir">Venus Margarita</div>
     </div>
 
-    <audio id="musica" loop>
-        <source src="https://files.catbox.moe/o634v1.mp3" type="audio/mpeg">
-    </audio>
+   <audio id="musica" loop preload="auto">
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
 
     <canvas id="canvas-efectos"></canvas>
 
@@ -147,13 +147,25 @@
 
     <script>
         function iniciarGala() {
-            document.getElementById('musica').play();
-            document.getElementById('intro').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('intro').style.display = 'none';
-                reveal();
-            }, 1000);
-        }
+    const audio = document.getElementById('musica');
+    const intro = document.getElementById('intro');
+
+    // 1. Intentar tocar la música inmediatamente
+    audio.play().then(() => {
+        console.log("Música iniciada correctamente");
+    }).catch(error => {
+        console.log("Error al reproducir: ", error);
+    });
+
+    // 2. Hacer que la pantalla blanca se desvanezca
+    intro.style.opacity = '0';
+    
+    // 3. Esperar a que termine la animación para quitar el cuadro blanco
+    setTimeout(() => {
+        intro.style.display = 'none';
+        reveal(); // Esto activa las animaciones de los textos
+    }, 1000); 
+}
 
         // Cuenta Regresiva
         const target = new Date("July 18, 2026 19:00:00").getTime();
@@ -216,6 +228,11 @@
             });
         }
         window.addEventListener("scroll", reveal);
+        // Esto prepara la música en cuanto se abre la página
+window.onload = function() {
+    const audio = document.getElementById('musica');
+    audio.load();
+};
     </script>
 </body>
 </html>
