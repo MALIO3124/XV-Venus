@@ -74,12 +74,39 @@
             letter-spacing: 2px;
             font-size: 0.8rem;
             transition: 0.3s;
+            position: relative; /* Necesario para el brillo */
+            overflow: hidden;   /* Corta el brillo para que no se salga del botón */
+        }
+
+        /* El rayo de luz */
+        .boton-mapa::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.4) 50%, 
+                rgba(255,255,255,0) 100%
+            );
+            transform: skewX(-25deg);
+            transition: none;
+            animation: brilloDorado 3s infinite; /* Se repite cada 3 segundos */
+        }
+
+        @keyframes brilloDorado {
+            0% { left: -150%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
         }
 
         .boton-mapa:hover {
             background: var(--oro-solido);
             color: white;
-            box-shadow: 0 10px 20px rgba(179, 135, 40, 0.2);
+            box-shadow: 0 10px 20px rgba(179, 135, 40, 0.3);
         }
     </style>
 </head>
